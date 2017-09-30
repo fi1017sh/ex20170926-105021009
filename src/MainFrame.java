@@ -1,16 +1,16 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+        import java.awt.event.ActionEvent;
+        import java.awt.event.ActionListener;
+        import java.awt.event.WindowAdapter;
+        import java.awt.event.WindowEvent;
 
 public class MainFrame extends Frame {
     private Button btnexit=new Button("Exit");
     private Button btnadd=new Button("Add");
     private Button btnsub=new Button("Sub");
     private Label lab = new Label(">__<");
-    private int n=0,LabX=100,LabY=100;
+    private int n=0,LabX=100,LabY=100,LabCr=255,LabCg=255,LabCb=255;
     private Timer t1;
     private boolean flag=true;
 
@@ -27,7 +27,7 @@ public class MainFrame extends Frame {
             }
         });
         this.setLayout(null);
-        btnexit.setBounds(200,400,100,50);
+        btnexit.setBounds(200,300,100,50);
         btnexit.setBackground(new Color(0x5650F9));
         this.add(btnexit);
         btnexit.addActionListener(new ActionListener() {
@@ -36,14 +36,15 @@ public class MainFrame extends Frame {
                 System.exit(0);
             }
         });
-        btnadd.setBounds(200,300,100,50);
+        btnadd.setBounds(300,300,100,50);
         btnadd.setBackground(new Color(0x6B92F9));
         this.add(btnadd);
-        btnsub.setBounds(300,300,100,50);
+        btnsub.setBounds(100,300,100,50);
         btnsub.setBackground(new Color(0x6B92F9));
         this.add(btnsub);
         lab.setBounds(LabX,LabY,100,50);
         lab.setForeground(new Color(0x1C0260));
+        lab.setAlignment(Label.CENTER);
         this.add(lab);
         btnadd.addActionListener(new ActionListener() {
             @Override
@@ -66,19 +67,29 @@ public class MainFrame extends Frame {
         t1= new Timer(25, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                lab.setBackground(new Color(LabCr,LabCg,LabCb));
                 if(flag){
                     LabX+=5;
                     lab.setLocation(LabX,LabY);
-                    if(LabX>=MainFrame.this.getWidth()){flag=false;}
-                }else {
-                    LabX-=5;
-                    lab.setLocation(LabX,LabY);
-                    if(LabX<=0){flag=true;}
+                    if(LabX>=MainFrame.this.getWidth()){
+                        flag=false;
+                        }
+
+                    if(LabX>=MainFrame.this.getWidth()){
+                       LabCr-=5;LabCg-=5;
+                    }} else {
+                        LabX -= 5;
+                        lab.setLocation(LabX, LabY);
+                        if (LabX <= 0) {
+                            flag = true;
+                            LabCr += 5;
+                            LabCg += 5;
+                        }}}
+                    });
+
                 }
 
-            }
-        });
-
-    }
 }
+
+
 //抓座標 lab.setText(Integer.toString(LabX)+","+Integer.toString(LabY));
