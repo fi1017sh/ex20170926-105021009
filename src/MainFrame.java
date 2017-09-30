@@ -75,13 +75,14 @@ public class MainFrame extends Frame {
                         flag=false;
                         }
 
-                    if(LabX>=MainFrame.this.getWidth()){
+                    if(LabCr-5>0){
                        LabCr-=5;LabCg-=5;
                     }} else {
+                        if(LabX<=0){flag=true;}
                         LabX -= 5;
                         lab.setLocation(LabX, LabY);
-                        if (LabX <= 0) {
-                            flag = true;
+                        if (LabCr+5<225) {
+
                             LabCr += 5;
                             LabCg += 5;
                         }}}
